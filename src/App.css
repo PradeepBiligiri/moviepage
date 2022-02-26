@@ -1,8 +1,8 @@
-/* .App {
-  background-color: rgb(48, 45, 45);
+.App {
+  background-color: rgb(231, 218, 94);
   font-family: sans-serif;
   text-align: center;
-} */
+}
 /* .user-profile {
   height: 200px;
   width: 200px;
@@ -23,12 +23,14 @@
 
 .movie-container {
   /* background-color: rgb(34, 33, 33); */
+
+  text-align: left;
   width: 340px;
 }
 .movie-poster {
   width: 340px;
   height: 500px;
-  object-fit: cover;
+  object-fit: inherit;
   box-shadow: 5px 10px 10px rgb(20, 20, 20);
 }
 .movie-name {

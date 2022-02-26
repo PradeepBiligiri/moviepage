@@ -1,8 +1,11 @@
 import "./App.css";
 // import { AddColor } from "./ColorBox";
 import { Movies } from "./Movies";
+// import { useState } from "react";
 
 export default function App() {
+  // const [enable, setEnable] = useState(false);
+  // const toggelVisibility = () => setEnable(!enable);
   const movieList = [
     {
       name: "Garuda Gamana Vrushabha Vahana",
@@ -24,15 +27,15 @@ export default function App() {
       name: "Mahaan",
       poster: "https://pbs.twimg.com/media/E9PolQEVoAEOjzn.jpg",
       rating: 8.1,
-      Summary:
+      summary:
         "Gandhi Mahaan, a school teacher, is abandoned by his family after he decides to live a life of his own, with personal freedom.",
     },
     {
       name: "Minnal Murali",
-      Poster:
+      poster:
         "https://www.nowrunning.com/content/movie/2018/minna-23659/Stills/minnal_2021320.jpg",
       rating: 8.1,
-      Summary:
+      summary:
         "An unusual event creates a lightning which in turns gives superhuman abilies to an ambitious tailor ,whose responsibility is now to protect his home village from the evil plans of the antagonist.",
     },
     {
@@ -45,7 +48,7 @@ export default function App() {
     },
     {
       name: "RRR",
-      Poster:
+      poster:
         "https://englishtribuneimages.blob.core.windows.net/gallary-content/2021/6/Desk/2021_6$largeimg_977224513.JPG",
       rating: 8.8,
       summary:
@@ -108,6 +111,7 @@ export default function App() {
   ];
   return (
     <div className="App">
+      <h1>Movie Buzz</h1>
       <div className="movie-list">
         {movieList.map((ml) => (
           <Movies
@@ -115,6 +119,8 @@ export default function App() {
             poster={ml.poster}
             rating={ml.rating}
             summary={ml.summary}
+            // enable={enable}
+            // toggelVisibility={toggelVisibility}
           />
         ))}
       </div>
