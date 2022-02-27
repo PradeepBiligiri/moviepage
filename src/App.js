@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 import "./App.css";
 // import { AddColor } from "./ColorBox";
 import { Movies } from "./Movies";
@@ -120,32 +122,43 @@ export default function App() {
     <div className="App">
       <h1>Movie Buzz</h1>
       <div className="add-movie-form">
-        <input
-          placeholder="Add Movie name"
+        <TextField
+          id="standard-basic"
+          label="Name"
+          variant="standard"
           onChange={(event) => {
             setName(event.target.value);
           }}
         />
-        <input
-          placeholder="Add Movie poster"
+
+        <TextField
+          id="standard-basic"
+          label="Poster"
+          variant="standard"
           onChange={(event) => {
             setPoster(event.target.value);
           }}
         />
-        <input
-          placeholder="Add Movie Summary"
+
+        <TextField
+          id="standard-basic"
+          label="Summary"
+          variant="standard"
           onChange={(event) => {
             setSummary(event.target.value);
           }}
         />
-        <input
-          placeholder="Add Movie Rating"
+
+        <TextField
+          id="standard-basic"
+          label="Rating"
+          variant="standard"
           onChange={(event) => {
             setRating(event.target.value);
           }}
         />
         {/* Copy Movie list and add new Movie through button */}
-        <button
+        {/* <button
           onClick={() => {
             const newMovie = {
               name: name,
@@ -157,8 +170,23 @@ export default function App() {
             setMovieList([...movieList, newMovie]);
           }}
         >
-          Movie details
-        </button>
+          Add Movie
+        </button> */}
+        <Button
+          variant="contained"
+          onClick={() => {
+            const newMovie = {
+              name: name,
+              poster: poster,
+              rating: Rating,
+              summary: summary,
+            };
+
+            setMovieList([...movieList, newMovie]);
+          }}
+        >
+          Add Movie
+        </Button>
       </div>
       <br />
       <div className="movie-list">

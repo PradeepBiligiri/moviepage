@@ -1,3 +1,6 @@
+import Button from "@mui/material/Button";
+import ThumbUpOffAltRoundedIcon from "@mui/icons-material/ThumbUpOffAltRounded";
+import ThumbDownAltRoundedIcon from "@mui/icons-material/ThumbDownAltRounded";
 import { useState } from "react";
 
 export function Counter() {
@@ -10,25 +13,28 @@ export function Counter() {
   // }
   return (
     <div className="counter-container">
-      <button
+      <Button
+        variant="text"
         className="bt-sz-lg"
         onClick={() => {
           setLike(like + 1);
           console.log({ like });
         }}
       >
-        <span>👍</span> {like}
-      </button>
+        <ThumbUpOffAltRoundedIcon color="success" fontSize="small" />
+        {like}
+      </Button>
 
-      <button
+      <Button
+        variant="text"
         className="bt-sz-lg"
         onClick={() => {
           setDislike(dislike + 1);
           console.log({ dislike });
         }}
       >
-        <span>👎</span> {dislike}
-      </button>
+        <ThumbDownAltRoundedIcon color="error" fontSize="small" /> {dislike}
+      </Button>
     </div>
   );
 }

@@ -1,3 +1,8 @@
+import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import { Counter } from "./Counter.js";
 import { useState } from "react";
 
@@ -128,16 +133,25 @@ export function Movies({
       <img src={poster} alt={name + " poster"} className="movie-poster" />
       <div className="movie-specs">
         <h2 className="movie-name">{name}</h2>
+        <Button
+          variant="text"
+          onClick={() =>
+            setShow(!show) ? <ExpandMoreIcon /> : <ExpandLessIcon />
+          }
+        >
+          <ExpandMoreIcon />
+        </Button>
         <p style={styles} className="movie-rating">
-          ⭐ {rating}
+          <StarRateRoundedIcon style={{ color: "goldenrod" }} /> {rating}
         </p>
       </div>
       {/* <h4>{`The show value is : ${show}`}</h4> */}
-      <button
+      {/* <button
         onClick={() => (setShow(!show) ? "Show summary" : "Hide summary")}
       >
         Show summary
-      </button>
+      </button> */}
+
       {/* <button onClick={toggelVisibility}>
         {!enable ? "Show Summary" : "Hide Summary"}
       </button> */}
