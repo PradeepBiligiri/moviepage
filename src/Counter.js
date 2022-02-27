@@ -1,6 +1,11 @@
 import Button from "@mui/material/Button";
+import Badge from "@mui/material/Badge";
+import MailIcon from "@mui/icons-material/Mail";
 import ThumbUpOffAltRoundedIcon from "@mui/icons-material/ThumbUpOffAltRounded";
 import ThumbDownAltRoundedIcon from "@mui/icons-material/ThumbDownAltRounded";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import IconButton from "@mui/material/IconButton";
 import { useState } from "react";
 
 export function Counter() {
@@ -13,28 +18,45 @@ export function Counter() {
   // }
   return (
     <div className="counter-container">
-      <Button
-        variant="text"
-        className="bt-sz-lg"
-        onClick={() => {
-          setLike(like + 1);
-          console.log({ like });
-        }}
-      >
-        <ThumbUpOffAltRoundedIcon color="success" fontSize="small" />
-        {like}
-      </Button>
+      <div className="like-button">
+        <IconButton
+          aria-label="like-movie"
+          className="bt-sz-lg"
+          color="success"
+          onClick={() => {
+            setLike(like + 1);
+            // console.log({ like });
+          }}
+        >
+          <Badge badgeContent={like} color="success">
+            👍
+          </Badge>
+          {/* <ThumbUpOffAltRoundedIcon color="success" fontSize="small" /> */}
+        </IconButton>
 
-      <Button
-        variant="text"
-        className="bt-sz-lg"
-        onClick={() => {
-          setDislike(dislike + 1);
-          console.log({ dislike });
-        }}
-      >
-        <ThumbDownAltRoundedIcon color="error" fontSize="small" /> {dislike}
-      </Button>
+        <IconButton
+          aria-label="Dislike-movie"
+          className="bt-sz-lg"
+          onClick={() => {
+            setDislike(dislike + 1);
+            // console.log({ dislike });
+          }}
+          color="error"
+        >
+          <Badge badgeContent={dislike} color="error">
+            👎
+          </Badge>
+          {/* <ThumbDownAltRoundedIcon color="error" fontSize="small" /> */}
+        </IconButton>
+      </div>
+      <div>
+        <IconButton aria-label="Delete-movie">
+          <DeleteIcon color="error" />
+        </IconButton>
+        <IconButton aria-label="Edit-movie">
+          <EditIcon color="primary" />
+        </IconButton>
+      </div>
     </div>
   );
 }

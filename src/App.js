@@ -121,7 +121,7 @@ export default function App() {
 
   return (
     <div className="App">
-      <h1>Movie Buzz</h1>
+      <h1>Movies</h1>
       <div className="add-movie-form">
         <TextField
           id="standard-basic"

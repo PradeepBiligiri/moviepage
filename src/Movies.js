@@ -3,6 +3,8 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
+import DeleteIcon from "@mui/icons-material/Delete";
+import IconButton from "@mui/material/IconButton";
 import { Counter } from "./Counter.js";
 import { useState } from "react";
 
@@ -132,15 +134,17 @@ export function Movies({
     <div className="movie-container">
       <img src={poster} alt={name + " poster"} className="movie-poster" />
       <div className="movie-specs">
-        <h2 className="movie-name">{name}</h2>
-        <Button
-          variant="text"
-          onClick={() =>
-            setShow(!show) ? <ExpandMoreIcon /> : <ExpandLessIcon />
-          }
-        >
-          <ExpandMoreIcon />
-        </Button>
+        <h2 className="movie-name">
+          {name}
+          <IconButton
+            aria-label="Toggle-Summary"
+            color="primary"
+            onClick={() => setShow(!show)}
+          >
+            {show ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+          </IconButton>
+        </h2>
+
         <p style={styles} className="movie-rating">
           <StarRateRoundedIcon style={{ color: "goldenrod" }} /> {rating}
         </p>
@@ -154,13 +158,18 @@ export function Movies({
 
       {/* <button onClick={toggelVisibility}>
         {!enable ? "Show Summary" : "Hide Summary"}
-      </button> */}
+        </button> */}
       <br />
-      <p style={paraStyle} className="movie-summary">
-        {show && summary}
-      </p>
+
+      {/* Conditional Styling */}
+      {/* <p style={paraStyle} className="movie-summary">
+        {summary}
+      </p> */}
+
+      {/* Conditional Rendring */}
+      {show ? <p className="movie-summary">{summary}</p> : ""}
+
       {/* <div>{enable && <p className="movie-summary">{summary}</p>}</div> */}
-      <br />
       <div className="counter">
         <Counter />
       </div>
