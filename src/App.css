@@ -60,3 +60,9 @@
   display: flex;
   gap: 10px;
 }
+.add-movie-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
