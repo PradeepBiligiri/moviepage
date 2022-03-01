@@ -1,7 +1,10 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
+import Button from "@mui/material/Button";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 export function MovieDetails({ movieList }) {
+  const navigate = useNavigate();
   const { id } = useParams();
   const movie = movieList[id];
   console.log(movieList, movie);
@@ -9,7 +12,7 @@ export function MovieDetails({ movieList }) {
     <div>
       <iframe
         width="85%"
-        height="750"
+        height="570"
         src={movie.trailer}
         title="YouTube video player"
         frameborder="0"
@@ -27,6 +30,15 @@ export function MovieDetails({ movieList }) {
         </div>
 
         <p className="movie-summary">{movie.summary}</p>
+
+        <Button
+          variant="contained"
+          className="button"
+          onClick={() => navigate(-1)}
+          startIcon={<ArrowBackIosIcon fontSize="small" />}
+        >
+          Back
+        </Button>
       </div>
     </div>
   );
