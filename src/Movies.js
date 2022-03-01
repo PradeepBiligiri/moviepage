@@ -3,7 +3,9 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
+import { useNavigate } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
+import InfoIcon from "@mui/icons-material/Info";
 import IconButton from "@mui/material/IconButton";
 import { Counter } from "./Counter.js";
 import { useState } from "react";
@@ -13,6 +15,7 @@ export function Movies({
   poster,
   rating,
   summary,
+  id,
   // enable,
   // toggelVisibility,
 }) {
@@ -121,6 +124,14 @@ export function Movies({
       summary:
         "Remy, a rat, aspires to become a renowned French chef. However, he fails to realise that people despise rodents and will never enjoy a meal cooked by him.",
     },
+    {
+      name: "Ratatouille",
+      poster:
+        "https://resizing.flixster.com/gL_JpWcD7sNHNYSwI1ff069Yyug=/ems.ZW1zLXByZC1hc3NldHMvbW92aWVzLzc4ZmJhZjZiLTEzNWMtNDIwOC1hYzU1LTgwZjE3ZjQzNTdiNy5qcGc=",
+      rating: 8,
+      summary:
+        "Remy, a rat, aspires to become a renowned French chef. However, he fails to realise that people despise rodents and will never enjoy a meal cooked by him.",
+    },
   ]);
   // Conditional styling
   const styles = {
@@ -130,6 +141,7 @@ export function Movies({
     display: show ? "Block" : "none",
   };
 
+  const navigate = useNavigate();
   return (
     <div className="movie-container">
       <img src={poster} alt={name + " poster"} className="movie-poster" />
@@ -142,6 +154,15 @@ export function Movies({
             onClick={() => setShow(!show)}
           >
             {show ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+          </IconButton>
+
+          <IconButton
+            aria-label="Toggle-Summary"
+            color="primary"
+            //Change URL
+            onClick={() => navigate(`/movies/${id}`)}
+          >
+            <InfoIcon />
           </IconButton>
         </h2>
 

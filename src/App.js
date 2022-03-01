@@ -5,6 +5,8 @@ import TextField from "@mui/material/TextField";
 import "./App.css";
 // import { AddColor } from "./ColorBox";
 import { Movies } from "./Movies";
+import { NavLink, Route, Routes, useParams } from "react-router-dom";
+import { AddColor } from "./ColorBox";
 // import { useState } from "react";
 const initial_moive_list = [
   {
@@ -101,23 +103,87 @@ const initial_moive_list = [
       "In the kingdom of Mahishmati, Shivudu falls in love with a young warrior woman. While trying to woo her, he learns about the conflict-ridden past of his family and his true legacy.",
   },
   {
-    name: "Ratatouille",
+    name: "Vishwaroopam",
     poster:
-      "https://resizing.flixster.com/gL_JpWcD7sNHNYSwI1ff069Yyug=/ems.ZW1zLXByZC1hc3NldHMvbW92aWVzLzc4ZmJhZjZiLTEzNWMtNDIwOC1hYzU1LTgwZjE3ZjQzNTdiNy5qcGc=",
-    rating: 8,
+      "https://m.media-amazon.com/images/M/MV5BOWIxNDdhNzEtMjE5YS00ZWM0LTk3YjUtNzBlZDQzMjk3NGRlXkEyXkFqcGdeQXVyMTA4NjE0NjEy._V1_.jpg",
+    rating: 8.1,
     summary:
-      "Remy, a rat, aspires to become a renowned French chef. However, he fails to realise that people despise rodents and will never enjoy a meal cooked by him.",
+      "When a classical dancer's suspecting wife sets an investigator behind him, a series of violent events are triggered, revealing his real identity and connection to a darker world.",
+  },
+  {
+    name: "K.G.F Chapter 1",
+    poster:
+      "https://m.media-amazon.com/images/M/MV5BMjY1MmM2N2ItYjc1NS00Yjc1LTkxYmQtNGJiMjYwMTlmNDE5XkEyXkFqcGdeQXVyMTA4NjE0NjEy._V1_.jpg",
+    rating: 8.3,
+    summary:
+      "In the 1970s, a gangster goes undercover as a slave to assassinate the owner of a notorious gold mine.",
+  },
+  {
+    name: "Virumandi",
+    poster:
+      "https://m.media-amazon.com/images/M/MV5BNzUxYWUwMzktOWZmMS00NTU1LTg1ODgtYTYxMmRjNGZkYjkyXkEyXkFqcGdeQXVyODEzOTQwNTY@._V1_.jpg",
+    rating: 8.4,
+    summary:
+      "A temperamental farmer gets embroiled in a bloody clan feud in a southern Tamil Nadu village.",
   },
 ];
 
+//Home --> welcome to Move App
+//movie-list -->add movie from + movie list
+// color game --> add Color components
 export default function App() {
+  //Lifting the state up -- lifteed from child to parent
+  const [movieList, setMovieList] = useState(initial_moive_list);
+  return (
+    <div className="App">
+      <ul>
+        <li>
+          <NavLink to="/">Home</NavLink>
+        </li>
+        <li>
+          <NavLink to="/movies">Movies</NavLink>
+        </li>
+        <li>
+          <NavLink to="/color-game">Color Game</NavLink>
+        </li>
+      </ul>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route
+          path="/movies"
+          element={
+            <MovieList movieList={movieList} setMovieList={setMovieList} />
+          }
+        />
+        <Route path="/color-game" element={<AddColor />} />
+        <Route
+          path="/movies/:id"
+          element={
+            <MovieDetails movieList={movieList} setMovieList={setMovieList} />
+          }
+        />
+      </Routes>
+    </div>
+  );
+}
+
+function MovieDetails({ movieList }) {
+  const { id } = useParams();
+  const movie = movieList[id];
+  console.log(movieList, movie);
+  return (
+    <div>
+      <h1>Movie Details of {movie.name}</h1>
+    </div>
+  );
+}
+function MovieList({ movieList, setMovieList }) {
   // const [enable, setEnable] = useState(false);
   // const toggelVisibility = () => setEnable(!enable);
   const [name, setName] = useState("");
   const [poster, setPoster] = useState("");
   const [summary, setSummary] = useState("");
   const [Rating, setRating] = useState("");
-  const [movieList, setMovieList] = useState(initial_moive_list);
 
   return (
     <div className="App">
@@ -191,12 +257,13 @@ export default function App() {
       </div>
       <br />
       <div className="movie-list">
-        {movieList.map((ml) => (
+        {movieList.map((ml, index) => (
           <Movies
             name={ml.name}
             poster={ml.poster}
             rating={ml.rating}
             summary={ml.summary}
+            id={index}
             // movieList={movieList}
 
             // enable={enable}
@@ -209,6 +276,13 @@ export default function App() {
   );
 }
 
+function Home() {
+  return (
+    <div>
+      <h1> Welcome to Home😊😍</h1>
+    </div>
+  );
+}
 // function AddMovies({ addMovie }) {
 //   const movieList = [
 //     {
