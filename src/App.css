@@ -71,3 +71,6 @@
   align-items: center;
   justify-content: space-between;
 }
+.movie-detail-container {
+  max-width: 800px;
+}

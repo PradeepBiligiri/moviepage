@@ -16,6 +16,7 @@ export function Movies({
   rating,
   summary,
   id,
+
   // enable,
   // toggelVisibility,
 }) {
@@ -159,7 +160,7 @@ export function Movies({
           <IconButton
             aria-label="Toggle-Summary"
             color="primary"
-            //Change URL
+            //Change URL programaticaly
             onClick={() => navigate(`/movies/${id}`)}
           >
             <InfoIcon />
