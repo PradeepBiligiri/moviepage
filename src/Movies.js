@@ -198,4 +198,3 @@ export function Movies({
     </div>
   );
 }
-function AddMovie() {}

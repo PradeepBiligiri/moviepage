@@ -1,14 +1,13 @@
 import { useState } from "react";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-
 
 import "./App.css";
 // import { AddColor } from "./ColorBox";
-import { Movies } from "./Movies";
-import { NavLink, Route, Routes } from "react-router-dom";
+import { Navigate, NavLink, Route, Routes } from "react-router-dom";
 import { AddColor } from "./ColorBox";
 import { MovieDetails } from "./MovieDetails";
+import { MovieList } from "./MovieList";
+import { NotFoundPage } from "./NotFoundPage";
+import { AddMovies } from "./AddMovie";
 // import { useState } from "react";
 const initial_moive_list = [
   {
@@ -163,9 +162,20 @@ export default function App() {
         <li>
           <NavLink to="/color-game">Color Game</NavLink>
         </li>
+        <li>
+          <NavLink to="/movies/add">Add Movies</NavLink>
+        </li>
       </ul>
       <Routes>
+        <Route path="*" element={<Navigate replace to="/404" />} />
+        <Route path="/404" element={<NotFoundPage />} />
         <Route path="/" element={<Home />} />
+        <Route
+          path="/movies/add"
+          element={
+            <AddMovies movieList={movieList} setMovieList={setMovieList} />
+          }
+        />
         <Route
           path="/movies"
           element={
@@ -184,106 +194,6 @@ export default function App() {
   );
 }
 
-function MovieList({ movieList, setMovieList }) {
-  // const [enable, setEnable] = useState(false);
-  // const toggelVisibility = () => setEnable(!enable);
-  const [name, setName] = useState("");
-  const [poster, setPoster] = useState("");
-  const [summary, setSummary] = useState("");
-  const [Rating, setRating] = useState("");
-
-  return (
-    <div className="App">
-      <h1>Movies</h1>
-      <div className="add-movie-form">
-        <TextField
-          id="standard-basic"
-          label="Name"
-          variant="standard"
-          onChange={(event) => {
-            setName(event.target.value);
-          }}
-        />
-
-        <TextField
-          id="standard-basic"
-          label="Poster"
-          variant="standard"
-          onChange={(event) => {
-            setPoster(event.target.value);
-          }}
-        />
-
-        <TextField
-          id="standard-basic"
-          label="Summary"
-          variant="standard"
-          onChange={(event) => {
-            setSummary(event.target.value);
-          }}
-        />
-
-        <TextField
-          id="standard-basic"
-          label="Rating"
-          variant="standard"
-          onChange={(event) => {
-            setRating(event.target.value);
-          }}
-        />
-        {/* Copy Movie list and add new Movie through button */}
-        {/* <button
-          onClick={() => {
-            const newMovie = {
-              name: name,
-              poster: poster,
-              rating: Rating,
-              summary: summary,
-            };
-
-            setMovieList([...movieList, newMovie]);
-          }}
-        >
-          Add Movie
-        </button> */}
-        <Button
-          variant="contained"
-          onClick={() => {
-            const newMovie = {
-              name: name,
-              poster: poster,
-              rating: Rating,
-              summary: summary,
-            };
-
-            setMovieList([...movieList, newMovie]);
-          }}
-        >
-          Add Movie
-        </Button>
-      </div>
-      <br />
-      <div className="movie-list">
-        {movieList.map((ml, index) => (
-          <Movies
-            name={ml.name}
-            poster={ml.poster}
-            rating={ml.rating}
-            summary={ml.summary}
-            id={index}
-            trailer={ml.trailer}
-            // movieList={movieList}
-
-            // enable={enable}
-            // toggelVisibility={toggelVisibility}
-          />
-        ))}
-        {/* <AddMovies /> */}
-      </div>
-    </div>
-  );
-}
-
 function Home() {
   return (
     <div>
@@ -291,13 +201,3 @@ function Home() {
     </div>
   );
 }
-// function AddMovies({ addMovie }) {
-//   const movieList = [
-//     {
-//       name: { addMovie },
-//       poster: { addMovie },
-//       rating: { addMovie },
-//       summary: { addMovie },
-//     },
-//   ];
-// }
