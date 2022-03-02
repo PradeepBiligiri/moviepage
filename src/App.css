@@ -1,5 +1,5 @@
 .App {
-  background-color: rgb(255, 254, 254);
+  background-color: rgb(199, 193, 193);
   font-family: sans-serif;
   text-align: center;
 }
@@ -22,7 +22,7 @@
 }
 
 .movie-container {
-  /* background-color: rgb(34, 33, 33); */
+  background-color: rgb(199, 193, 193);
 
   text-align: left;
   width: 340px;
@@ -80,4 +80,10 @@
 .notfund {
   width: 100%;
   object-fit: cover;
+}
+ul {
+  color: white;
+  display: flex;
+  justify-content: space-evenly;
+  list-style: none;
 }

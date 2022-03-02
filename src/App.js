@@ -160,10 +160,10 @@ export default function App() {
           <NavLink to="/movies">Movies</NavLink>
         </li>
         <li>
-          <NavLink to="/color-game">Color Game</NavLink>
+          <NavLink to="/movies/add">Add Movies</NavLink>
         </li>
         <li>
-          <NavLink to="/movies/add">Add Movies</NavLink>
+          <NavLink to="/color-game">Color Game</NavLink>
         </li>
       </ul>
       <Routes>
