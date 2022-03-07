@@ -49,12 +49,7 @@ export function Counter({ deleteButton }) {
           {/* <ThumbDownAltRoundedIcon color="error" fontSize="small" /> */}
         </IconButton>
       </div>
-      <div>
-        {deleteButton}
-        <IconButton aria-label="Edit-movie">
-          <EditIcon color="primary" />
-        </IconButton>
-      </div>
+      <div>{deleteButton}</div>
     </div>
   );
 }

@@ -2,12 +2,26 @@ import { useState } from "react";
 
 import "./App.css";
 // import { AddColor } from "./ColorBox";
-import { Navigate, NavLink, Route, Routes } from "react-router-dom";
+import {
+  Navigate,
+  NavLink,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import { AddColor } from "./ColorBox";
 import { MovieDetails } from "./MovieDetails";
 import { MovieList } from "./MovieList";
 import { NotFoundPage } from "./NotFoundPage";
 import { AddMovies } from "./AddMovie";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import { Home } from "./Home";
 // import { useState } from "react";
 const initial_moive_list = [
   {
@@ -149,56 +163,88 @@ const initial_moive_list = [
 // color game --> add Color components
 export default function App() {
   //Lifting the state up -- lifteed from child to parent
-
+  const navigate = useNavigate();
   const [movieList, setMovieList] = useState(initial_moive_list);
   return (
     <div className="App">
-      <ul>
-        <li>
-          <NavLink to="/">Home</NavLink>
-        </li>
-        <li>
-          <NavLink to="/movies">Movies</NavLink>
-        </li>
-        <li>
-          <NavLink to="/movies/add">Add Movies</NavLink>
-        </li>
-        <li>
-          <NavLink to="/color-game">Color Game</NavLink>
-        </li>
-      </ul>
-      <Routes>
-        <Route path="*" element={<Navigate replace to="/404" />} />
-        <Route path="/404" element={<NotFoundPage />} />
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/movies/add"
-          element={
-            <AddMovies movieList={movieList} setMovieList={setMovieList} />
-          }
-        />
-        <Route
-          path="/movies"
-          element={
-            <MovieList movieList={movieList} setMovieList={setMovieList} />
-          }
-        />
-        <Route path="/color-game" element={<AddColor />} />
-        <Route
-          path="/movies/:id"
-          element={
-            <MovieDetails movieList={movieList} setMovieList={setMovieList} />
-          }
-        />
-      </Routes>
-    </div>
-  );
-}
+      <AppBar position="static">
+        <Toolbar>
+          <Button
+            color="inherit"
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            Home
+          </Button>
+          <Button
+            color="inherit"
+            onClick={() => {
+              navigate("/movies");
+            }}
+          >
+            Movies
+          </Button>
+          <Button
+            color="inherit"
+            onClick={() => {
+              navigate("/movies/add");
+            }}
+          >
+            Add Movies
+          </Button>
+          <Button
+            color="inherit"
+            onClick={() => {
+              navigate("/color-game");
+            }}
+          >
+            Color Game
+          </Button>
+        </Toolbar>
+      </AppBar>
 
-function Home() {
-  return (
-    <div>
-      <h1> Welcome to Home😊😍</h1>
+      {/* <AppBar position="static">
+        <Button color="inherit">
+          <NavLink to="/">Home</NavLink>
+        </Button>
+        <Button>
+          <NavLink to="/movies">Movies</NavLink>
+        </Button>
+        <Button>
+          <NavLink to="/movies/add">Add Movies</NavLink>
+        </Button>
+        <Button>
+          <NavLink to="/color-game">Color Game</NavLink>
+        </Button>
+      </AppBar> */}
+
+      <div className="rouer-container">
+        <Routes>
+          <Route path="*" element={<Navigate replace to="/404" />} />
+          <Route path="/404" element={<NotFoundPage />} />
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/movies/add"
+            element={
+              <AddMovies movieList={movieList} setMovieList={setMovieList} />
+            }
+          />
+          <Route
+            path="/movies"
+            element={
+              <MovieList movieList={movieList} setMovieList={setMovieList} />
+            }
+          />
+          <Route path="/color-game" element={<AddColor />} />
+          <Route
+            path="/movies/:id"
+            element={
+              <MovieDetails movieList={movieList} setMovieList={setMovieList} />
+            }
+          />
+        </Routes>
+      </div>
     </div>
   );
 }

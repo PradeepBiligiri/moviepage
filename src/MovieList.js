@@ -1,11 +1,14 @@
 import { Movies } from "./Movies";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
+import EditIcon from "@mui/icons-material/Edit";
+import { AddMovies } from "./AddMovie";
+import { useNavigate } from "react-router-dom";
 
 export function MovieList({ movieList, setMovieList }) {
   // const [enable, setEnable] = useState(false);
   // const toggelVisibility = () => setEnable(!enable);
-
+  const navigate = useNavigate();
   return (
     <div className="App">
       <h1>Movies</h1>
@@ -31,6 +34,17 @@ export function MovieList({ movieList, setMovieList }) {
                 }}
               >
                 <DeleteIcon color="error" />
+              </IconButton>
+            }
+            editButton={
+              <IconButton
+                aria-label="Edit-movie"
+                onClick={() => {
+                  console.log("Edit movie...", index);
+                  navigate("/movies/add");
+                }}
+              >
+                <EditIcon color="primary" />
               </IconButton>
             }
           />

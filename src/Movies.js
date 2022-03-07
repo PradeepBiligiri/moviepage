@@ -9,6 +9,10 @@ import InfoIcon from "@mui/icons-material/Info";
 import IconButton from "@mui/material/IconButton";
 import { Counter } from "./Counter.js";
 import { useState } from "react";
+import Card from "@mui/material/Card";
+import Typography from "@mui/material/Typography";
+import CardContent from "@mui/material/CardContent";
+import { CardActions } from "@mui/material";
 
 export function Movies({
   name,
@@ -18,6 +22,7 @@ export function Movies({
   id,
   index,
   deleteButton,
+  editButton,
 
   // enable,
   // toggelVisibility,
@@ -146,11 +151,13 @@ export function Movies({
 
   const navigate = useNavigate();
   return (
-    <div className="movie-container">
+    <Card className="movie-container">
       <img src={poster} alt={name + " poster"} className="movie-poster" />
-      <div className="movie-specs">
-        <h2 className="movie-name">
-          {name}
+      <CardContent>
+        <div className="movie-specs">
+          <Typography gutterBottom variant="h5">
+            {name}
+          </Typography>
           <IconButton
             aria-label="Toggle-Summary"
             color="primary"
@@ -167,36 +174,40 @@ export function Movies({
           >
             <InfoIcon />
           </IconButton>
-        </h2>
 
-        <p style={styles} className="movie-rating">
-          <StarRateRoundedIcon style={{ color: "goldenrod" }} /> {rating}
-        </p>
-      </div>
-      {/* <h4>{`The show value is : ${show}`}</h4> */}
-      {/* <button
+          <p style={styles} className="movie-rating">
+            <StarRateRoundedIcon style={{ color: "goldenrod" }} /> {rating}
+          </p>
+        </div>
+        {/* <h4>{`The show value is : ${show}`}</h4> */}
+        {/* <button
         onClick={() => (setShow(!show) ? "Show summary" : "Hide summary")}
       >
         Show summary
       </button> */}
-
-      {/* <button onClick={toggelVisibility}>
+        {/* <button onClick={toggelVisibility}>
         {!enable ? "Show Summary" : "Hide Summary"}
         </button> */}
-      <br />
-
-      {/* Conditional Styling */}
-      {/* <p style={paraStyle} className="movie-summary">
+        <br />
+        {/* Conditional Styling */}
+        {/* <p style={paraStyle} className="movie-summary">
         {summary}
       </p> */}
+        {/* Conditional Rendring */}
+        <Typography variant="body2" color="text.secondary">
+          {show ? <p className="movie-summary">{summary}</p> : ""}
+        </Typography>
 
-      {/* Conditional Rendring */}
-      {show ? <p className="movie-summary">{summary}</p> : ""}
-
-      {/* <div>{enable && <p className="movie-summary">{summary}</p>}</div> */}
-      <div className="counter">
-        <Counter deleteButton={deleteButton} />
-      </div>
-    </div>
+        {/* <div>{enable && <p className="movie-summary">{summary}</p>}</div> */}
+        <CardActions>
+          <Counter
+          // deleteButton={deleteButton}
+          />
+          {deleteButton}
+          {editButton}
+        </CardActions>
+        {/* <div className="counter"></div> */}
+      </CardContent>
+    </Card>
   );
 }
