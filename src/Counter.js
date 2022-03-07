@@ -8,7 +8,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import { useState } from "react";
 
-export function Counter() {
+export function Counter({ deleteButton }) {
   // let like = 0;
   const [like, setLike] = useState(0);
   const [dislike, setDislike] = useState(0);
@@ -50,9 +50,7 @@ export function Counter() {
         </IconButton>
       </div>
       <div>
-        <IconButton aria-label="Delete-movie">
-          <DeleteIcon color="error" />
-        </IconButton>
+        {deleteButton}
         <IconButton aria-label="Edit-movie">
           <EditIcon color="primary" />
         </IconButton>

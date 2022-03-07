@@ -16,6 +16,8 @@ export function Movies({
   rating,
   summary,
   id,
+  index,
+  deleteButton,
 
   // enable,
   // toggelVisibility,
@@ -193,7 +195,7 @@ export function Movies({
 
       {/* <div>{enable && <p className="movie-summary">{summary}</p>}</div> */}
       <div className="counter">
-        <Counter />
+        <Counter deleteButton={deleteButton} />
       </div>
     </div>
   );

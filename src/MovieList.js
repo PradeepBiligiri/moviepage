@@ -1,4 +1,6 @@
 import { Movies } from "./Movies";
+import DeleteIcon from "@mui/icons-material/Delete";
+import IconButton from "@mui/material/IconButton";
 
 export function MovieList({ movieList, setMovieList }) {
   // const [enable, setEnable] = useState(false);
@@ -18,6 +20,19 @@ export function MovieList({ movieList, setMovieList }) {
             summary={ml.summary}
             id={index}
             trailer={ml.trailer}
+            deleteButton={
+              <IconButton
+                aria-label="Delete-movie"
+                onClick={() => {
+                  let copyMovieList = [...movieList];
+                  let removedMovie = copyMovieList.splice(index, 1);
+                  setMovieList(copyMovieList);
+                  console.log(removedMovie, "index", index);
+                }}
+              >
+                <DeleteIcon color="error" />
+              </IconButton>
+            }
           />
         ))}
         {/* <AddMovies /> */}
@@ -25,3 +40,15 @@ export function MovieList({ movieList, setMovieList }) {
     </div>
   );
 }
+// deleteButton={
+//   <button
+//     onClick={() => {
+//       let copyMovieList = [...movieList];
+//       let removedMovie = copyMovieList.splice(index, 1);
+//       console.log(removedMovie, "index", index);
+//       setMovieList(copyMovieList);
+//     }}
+//   >
+//     Delete
+//   </button>
+// }

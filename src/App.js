@@ -149,6 +149,7 @@ const initial_moive_list = [
 // color game --> add Color components
 export default function App() {
   //Lifting the state up -- lifteed from child to parent
+
   const [movieList, setMovieList] = useState(initial_moive_list);
   return (
     <div className="App">
