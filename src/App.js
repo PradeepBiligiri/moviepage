@@ -22,9 +22,15 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Home } from "./Home";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import Paper from "@mui/material/Paper";
+import Switch from "@mui/material/Switch";
 // import { useState } from "react";
 const initial_moive_list = [
   {
+    id: "101",
     name: "Garuda Gamana Vrushabha Vahana",
     poster:
       "https://lyricsraag.com/wp-content/uploads/2021/12/Chandrachooda-Garuda-Gamana-Vrishabha-Vahana-lyrics.jpg",
@@ -34,6 +40,7 @@ const initial_moive_list = [
     trailer: "https://www.youtube.com/embed/BnuDHJcSd0Q",
   },
   {
+    id: "102",
     name: "Ulidavaru Kandanthe",
     poster:
       "https://i.pinimg.com/originals/aa/1f/92/aa1f92bfa7a05deaa3302591fa148216.jpg",
@@ -43,6 +50,7 @@ const initial_moive_list = [
     trailer: "https://www.youtube.com/embed/POJ_6EtGeMw",
   },
   {
+    id: "103",
     name: "Mahaan",
     poster: "https://pbs.twimg.com/media/E9PolQEVoAEOjzn.jpg",
     rating: 8.1,
@@ -51,6 +59,7 @@ const initial_moive_list = [
     trailer: "https://www.youtube.com/embed/i4ORfM-q35Y",
   },
   {
+    id: "104",
     name: "Minnal Murali",
     poster:
       "https://www.nowrunning.com/content/movie/2018/minna-23659/Stills/minnal_2021320.jpg",
@@ -60,6 +69,7 @@ const initial_moive_list = [
     trailer: "https://www.youtube.com/embed/zAUAliz1TKA",
   },
   {
+    id: "105",
     name: "Spider-Man: No Way Home",
     poster:
       "https://mir-s3-cdn-cf.behance.net/project_modules/fs/b8320c110356853.6066eec3b3637.jpg",
@@ -69,6 +79,7 @@ const initial_moive_list = [
     trailer: "https://www.youtube.com/embed/JfVOs4VSpmA",
   },
   {
+    id: "106",
     name: "RRR",
     poster:
       "https://englishtribuneimages.blob.core.windows.net/gallary-content/2021/6/Desk/2021_6$largeimg_977224513.JPG",
@@ -78,6 +89,7 @@ const initial_moive_list = [
     trailer: "https://www.youtube.com/embed/a_1i3XCB7WY",
   },
   {
+    id: "107",
     name: "Iron man 2",
     poster:
       "https://m.media-amazon.com/images/M/MV5BMTM0MDgwNjMyMl5BMl5BanBnXkFtZTcwNTg3NzAzMw@@._V1_FMjpg_UX1000_.jpg",
@@ -87,6 +99,7 @@ const initial_moive_list = [
     trailer: "https://www.youtube.com/embed/wKtcmiifycU",
   },
   {
+    id: "108",
     name: "No Country for Old Men",
     poster:
       "https://upload.wikimedia.org/wikipedia/en/8/8b/No_Country_for_Old_Men_poster.jpg",
@@ -96,6 +109,7 @@ const initial_moive_list = [
     trailer: "https://www.youtube.com/embed/38A__WT3-o0",
   },
   {
+    id: "109",
     name: "The Lone Ranger",
     poster:
       "https://i.pinimg.com/originals/12/b6/a8/12b6a844a00ce1bd8857bc44dffce43e.jpg",
@@ -105,6 +119,7 @@ const initial_moive_list = [
     trailer: "https://www.youtube.com/embed/JjFsNSoDZK8",
   },
   {
+    id: "110",
     name: "End Game",
     rating: 8,
     summary:
@@ -114,6 +129,7 @@ const initial_moive_list = [
     trailer: "https://www.youtube.com/embed/TcMBFSGVi1c",
   },
   {
+    id: "111",
     name: "Interstellar",
     poster: "https://m.media-amazon.com/images/I/A1JVqNMI7UL._SL1500_.jpg",
     rating: 8.6,
@@ -122,6 +138,7 @@ const initial_moive_list = [
     trailer: "https://www.youtube.com/embed/zSWdZVtXT7E",
   },
   {
+    id: "112",
     name: "Baahubali",
     poster: "https://flxt.tmsimg.com/assets/p11546593_p_v10_af.jpg",
     rating: 8,
@@ -130,6 +147,7 @@ const initial_moive_list = [
     trailer: "https://www.youtube.com/embed/sOEg_YZQsTI",
   },
   {
+    id: "113",
     name: "Vishwaroopam",
     poster:
       "https://m.media-amazon.com/images/M/MV5BOWIxNDdhNzEtMjE5YS00ZWM0LTk3YjUtNzBlZDQzMjk3NGRlXkEyXkFqcGdeQXVyMTA4NjE0NjEy._V1_.jpg",
@@ -139,6 +157,7 @@ const initial_moive_list = [
     trailer: "https://www.youtube.com/embed/T2F6euNVT5Y",
   },
   {
+    id: "114",
     name: "K.G.F Chapter 1",
     poster:
       "https://m.media-amazon.com/images/M/MV5BMjY1MmM2N2ItYjc1NS00Yjc1LTkxYmQtNGJiMjYwMTlmNDE5XkEyXkFqcGdeQXVyMTA4NjE0NjEy._V1_.jpg",
@@ -148,6 +167,7 @@ const initial_moive_list = [
     trailer: "https://www.youtube.com/embed/qXgF-iJ_ezE",
   },
   {
+    id: "115",
     name: "Virumandi",
     poster:
       "https://m.media-amazon.com/images/M/MV5BNzUxYWUwMzktOWZmMS00NTU1LTg1ODgtYTYxMmRjNGZkYjkyXkEyXkFqcGdeQXVyODEzOTQwNTY@._V1_.jpg",
@@ -161,50 +181,96 @@ const initial_moive_list = [
 //Home --> welcome to Move App
 //movie-list -->add movie from + movie list
 // color game --> add Color components
+
 export default function App() {
   //Lifting the state up -- lifteed from child to parent
-  const navigate = useNavigate();
-  const [movieList, setMovieList] = useState(initial_moive_list);
-  return (
-    <div className="App">
-      <AppBar position="static">
-        <Toolbar>
-          <Button
-            color="inherit"
-            onClick={() => {
-              navigate("/");
-            }}
-          >
-            Home
-          </Button>
-          <Button
-            color="inherit"
-            onClick={() => {
-              navigate("/movies");
-            }}
-          >
-            Movies
-          </Button>
-          <Button
-            color="inherit"
-            onClick={() => {
-              navigate("/movies/add");
-            }}
-          >
-            Add Movies
-          </Button>
-          <Button
-            color="inherit"
-            onClick={() => {
-              navigate("/color-game");
-            }}
-          >
-            Color Game
-          </Button>
-        </Toolbar>
-      </AppBar>
+  fetch("https://6230246ef113bfceed49304c.mockapi.io/movies")
+    .then((response) => response.json())
+    .then((data) => {
+      setMovieList(data);
+      console.log(data);
+    });
 
-      {/* <AppBar position="static">
+  const navigate = useNavigate();
+  const [movieList, setMovieList] = useState([]);
+  const [themeMode, setThemeMode] = useState("light");
+  const theme = createTheme({
+    palette: {
+      mode: themeMode,
+    },
+  });
+  return (
+    <ThemeProvider theme={theme}>
+      <Paper style={{ borderRadius: 0, minHeight: "100vh" }} elevation={5}>
+        <div className="App">
+          <AppBar position="static">
+            <Toolbar>
+              <Button
+                color="inherit"
+                onClick={() => {
+                  navigate("/");
+                }}
+              >
+                Home
+              </Button>
+              <Button
+                color="inherit"
+                onClick={() => {
+                  navigate("/movies");
+                }}
+              >
+                Movies
+              </Button>
+              <Button
+                color="inherit"
+                onClick={() => {
+                  navigate("/movies/add");
+                }}
+              >
+                Add Movies
+              </Button>
+              <Button
+                color="inherit"
+                onClick={() => {
+                  navigate("/color-game");
+                }}
+              >
+                Color Game
+              </Button>
+              <Button
+                endIcon={
+                  themeMode === "light" ? (
+                    <Brightness7Icon />
+                  ) : (
+                    <Brightness4Icon />
+                  )
+                }
+                color="inherit"
+                onClick={() => {
+                  setThemeMode(themeMode === "light" ? "dark" : "light");
+                }}
+              >
+                {themeMode} Mode
+              </Button>
+              {/* <Switch
+                endIcon={
+                  themeMode === "light" ? (
+                    <Brightness7Icon />
+                  ) : (
+                    <Brightness4Icon />
+                  )
+                }
+                color="inherit"
+                onClick={() => {
+                  setThemeMode(themeMode === "light" ? "dark" : "light");
+                }}
+              >
+                {themeMode} Mode
+              </Switch> */}
+            </Toolbar>
+          </AppBar>
+
+          {/* <AppBar position="static">
         <Button color="inherit">
           <NavLink to="/">Home</NavLink>
         </Button>
@@ -219,32 +285,43 @@ export default function App() {
         </Button>
       </AppBar> */}
 
-      <div className="rouer-container">
-        <Routes>
-          <Route path="*" element={<Navigate replace to="/404" />} />
-          <Route path="/404" element={<NotFoundPage />} />
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/movies/add"
-            element={
-              <AddMovies movieList={movieList} setMovieList={setMovieList} />
-            }
-          />
-          <Route
-            path="/movies"
-            element={
-              <MovieList movieList={movieList} setMovieList={setMovieList} />
-            }
-          />
-          <Route path="/color-game" element={<AddColor />} />
-          <Route
-            path="/movies/:id"
-            element={
-              <MovieDetails movieList={movieList} setMovieList={setMovieList} />
-            }
-          />
-        </Routes>
-      </div>
-    </div>
+          <div className="rouer-container">
+            <Routes>
+              <Route path="*" element={<Navigate replace to="/404" />} />
+              <Route path="/404" element={<NotFoundPage />} />
+              <Route path="/" element={<Home />} />
+              <Route
+                path="/movies/add"
+                element={
+                  <AddMovies
+                    movieList={movieList}
+                    setMovieList={setMovieList}
+                  />
+                }
+              />
+              <Route
+                path="/movies"
+                element={
+                  <MovieList
+                    movieList={movieList}
+                    setMovieList={setMovieList}
+                  />
+                }
+              />
+              <Route path="/color-game" element={<AddColor />} />
+              <Route
+                path="/movies/:id"
+                element={
+                  <MovieDetails
+                    movieList={movieList}
+                    setMovieList={setMovieList}
+                  />
+                }
+              />
+            </Routes>
+          </div>
+        </div>
+      </Paper>
+    </ThemeProvider>
   );
 }
