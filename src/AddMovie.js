@@ -2,8 +2,9 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API } from "./global";
 
-export function AddMovies({ movieList, setMovieList }) {
+export function AddMovies() {
   const [name, setName] = useState("");
   const [poster, setPoster] = useState("");
   const [summary, setSummary] = useState("");
@@ -81,8 +82,21 @@ export function AddMovies({ movieList, setMovieList }) {
             trailer: trailer,
           };
 
-          setMovieList([...movieList, newMovie]);
-          navigate("/movies");
+          // setMovieList([...movieList, newMovie]);
+
+          //1. To CREATE we use POST method
+          //2. The BODY will have the data which is converted to JSON
+          //3. Headers is user for the JSON.
+
+          fetch(`${API}/movies`, {
+            method: "POST",
+            body: JSON.stringify(newMovie),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((data) => data.json)
+            .then(() => navigate("/movies"));
         }}
       >
         Add Movie

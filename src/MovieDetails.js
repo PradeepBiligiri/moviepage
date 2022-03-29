@@ -2,12 +2,24 @@ import { useNavigate, useParams } from "react-router-dom";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import Button from "@mui/material/Button";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import { useEffect, useState } from "react";
+import { API } from "./global.js";
 
-export function MovieDetails({ movieList }) {
+export function MovieDetails() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const movie = movieList[id];
-  console.log(movieList, movie);
+  // const movie = movieList[id];
+
+  const [movie, setMovie] = useState({});
+  useEffect(() => {
+    fetch(`${API}/movies/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setMovie(data);
+        console.log(data);
+      });
+  }, []);
+  console.log(movie, movie);
   return (
     <div>
       <iframe

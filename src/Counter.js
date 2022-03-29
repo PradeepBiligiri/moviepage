@@ -6,7 +6,7 @@ import ThumbDownAltRoundedIcon from "@mui/icons-material/ThumbDownAltRounded";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function Counter({ deleteButton }) {
   // let like = 0;
@@ -16,6 +16,9 @@ export function Counter({ deleteButton }) {
   // function likhandler(){
   //   return(setLike = like+1)
   // }
+  useEffect(() => {
+    console.log("Like is update :👍", like);
+  }, [like, dislike]);
   return (
     <div className="counter-container">
       <div className="like-button">

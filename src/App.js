@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "./App.css";
 // import { AddColor } from "./ColorBox";
@@ -184,13 +184,14 @@ const initial_moive_list = [
 
 export default function App() {
   //Lifting the state up -- lifteed from child to parent
-  fetch("https://6230246ef113bfceed49304c.mockapi.io/movies")
-    .then((response) => response.json())
-    .then((data) => {
-      setMovieList(data);
-      console.log(data);
-    });
-
+  // useEffect(() => {
+  //   fetch("https://6230246ef113bfceed49304c.mockapi.io/movies")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       // setMovieList(data);
+  //       console.log(data);
+  //     });
+  // }, []);
   const navigate = useNavigate();
   const [movieList, setMovieList] = useState([]);
   const [themeMode, setThemeMode] = useState("light");
@@ -290,34 +291,10 @@ export default function App() {
               <Route path="*" element={<Navigate replace to="/404" />} />
               <Route path="/404" element={<NotFoundPage />} />
               <Route path="/" element={<Home />} />
-              <Route
-                path="/movies/add"
-                element={
-                  <AddMovies
-                    movieList={movieList}
-                    setMovieList={setMovieList}
-                  />
-                }
-              />
-              <Route
-                path="/movies"
-                element={
-                  <MovieList
-                    movieList={movieList}
-                    setMovieList={setMovieList}
-                  />
-                }
-              />
+              <Route path="/movies/add" element={<AddMovies />} />
+              <Route path="/movies" element={<MovieList />} />
               <Route path="/color-game" element={<AddColor />} />
-              <Route
-                path="/movies/:id"
-                element={
-                  <MovieDetails
-                    movieList={movieList}
-                    setMovieList={setMovieList}
-                  />
-                }
-              />
+              <Route path="/movies/:id" element={<MovieDetails />} />
             </Routes>
           </div>
         </div>
