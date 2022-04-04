@@ -3,13 +3,14 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 import { AddMovies } from "./AddMovie";
-import { useNavigate } from "react-router-dom";
+import { Router, Routes, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { API } from "./global";
 
 export function MovieList() {
   // const [enable, setEnable] = useState(false);
   // const toggelVisibility = () => setEnable(!enable);
+  const navigate = useNavigate();
   const [movieList, setMovieList] = useState([]);
   const getMovie = () => {
     fetch(`${API}/movies`, { method: "GET" })
@@ -23,7 +24,6 @@ export function MovieList() {
     getMovie();
   }, []);
 
-  const navigate = useNavigate();
   return (
     <div className="App">
       <h1>Movies</h1>
@@ -54,12 +54,9 @@ export function MovieList() {
             editButton={
               <IconButton
                 aria-label="Edit-movie"
-                onClick={() => {
-                  console.log("Edit movie...", index);
-                  navigate("/movies/add");
-                }}
+                onClick={() => navigate(`/movies/edit/${ml.id}`)}
               >
-                <EditIcon color="primary" />
+                <EditIcon color="secondary" />
               </IconButton>
             }
           />

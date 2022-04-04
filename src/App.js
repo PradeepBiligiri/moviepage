@@ -27,6 +27,7 @@ import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import Paper from "@mui/material/Paper";
 import Switch from "@mui/material/Switch";
+import { EditMovie } from "./EditMovie";
 // import { useState } from "react";
 const initial_moive_list = [
   {
@@ -230,6 +231,7 @@ export default function App() {
               >
                 Add Movies
               </Button>
+
               <Button
                 color="inherit"
                 onClick={() => {
@@ -292,6 +294,7 @@ export default function App() {
               <Route path="/404" element={<NotFoundPage />} />
               <Route path="/" element={<Home />} />
               <Route path="/movies/add" element={<AddMovies />} />
+              <Route path="/movies/edit/:id" element={<EditMovie />} />
               <Route path="/movies" element={<MovieList />} />
               <Route path="/color-game" element={<AddColor />} />
               <Route path="/movies/:id" element={<MovieDetails />} />
