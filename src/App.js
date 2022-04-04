@@ -242,6 +242,14 @@ export default function App() {
                 Color Game
               </Button>
               <Button
+                color="inherit"
+                onClick={() => {
+                  navigate("/basic-form");
+                }}
+              >
+                Basic form
+              </Button>
+              <Button
                 endIcon={
                   themeMode === "light" ? (
                     <Brightness7Icon />
