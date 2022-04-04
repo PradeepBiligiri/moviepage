@@ -28,6 +28,7 @@ import Brightness7Icon from "@mui/icons-material/Brightness7";
 import Paper from "@mui/material/Paper";
 import Switch from "@mui/material/Switch";
 import { EditMovie } from "./EditMovie";
+import { BasicForm } from "./BasicForm";
 // import { useState } from "react";
 const initial_moive_list = [
   {
@@ -298,6 +299,7 @@ export default function App() {
               <Route path="/movies" element={<MovieList />} />
               <Route path="/color-game" element={<AddColor />} />
               <Route path="/movies/:id" element={<MovieDetails />} />
+              <Route path="/basic-form" element={<BasicForm />} />
             </Routes>
           </div>
         </div>
