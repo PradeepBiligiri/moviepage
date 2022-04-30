@@ -3,59 +3,126 @@ import TextField from "@mui/material/TextField";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API } from "./global";
+import { useFormik } from "formik";
+import * as yup from "yup";
+
+const editValidationSchema = yup.object({
+  name: yup.string().required("tell us the movie name"),
+  poster: yup
+    .string()
+    .min(4, "need longer charecters")
+    .required("poster is required"),
+  rating: yup
+    .number()
+    .typeError("This doesn't look like a rating")
+    .min(0, "Need a higher rating")
+    .max(10, "Too much rating")
+    .required("Raating is required"),
+  summary: yup
+    .string()
+    .min(20, "need longer charecters")
+    .required("Summary is required"),
+  trailer: yup
+    .string()
+    .min(4, "need longer charecters")
+    .required("trailer is required"),
+});
 
 export function EditMovieForm({ movie }) {
-  const [name, setName] = useState(movie.name);
-  const [poster, setPoster] = useState(movie.poster);
-  const [summary, setSummary] = useState(movie.summary);
-  const [Rating, setRating] = useState(movie.rating);
-  const [trailer, setTrailer] = useState(movie.trailer);
+  // const [name, setName] = useState(movie.name);
+  // const [poster, setPoster] = useState(movie.poster);
+  // const [summary, setSummary] = useState(movie.summary);
+  // const [Rating, setRating] = useState(movie.rating);
+  // const [trailer, setTrailer] = useState(movie.trailer);
   const navigate = useNavigate();
+  const edit = useFormik({
+    initialValues: {
+      name: name,
+      poster: poster,
+      summary: summary,
+      rating: Rating,
+      trailer: trailer,
+    },
+    validationSchema: editValidationSchema,
+    onSubmit: (editMovie) => {
+      console.log("onSubmit", editMovie);
+      EditMovie(editMovie);
+    },
+  });
+  const EditMovie = (editMovie) => {
+    // setMovieList([...movieList, updatedMovie]);
+    //1. To UPDATE we use PUT method and respoective ID
+    //2. The BODY will have the data which is converted to JSON
+    //3. Headers is user for the JSON.
+
+    console.log("EditMovie", editMovie);
+    fetch(`${API}/movies/${movie.id}`, {
+      method: "PUT",
+      body: JSON.stringify(editMovie),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((data) => data.json)
+      .then(() => navigate("/movies"));
+  };
+
   return (
-    <div className="add-movie-form">
+    <form className="add-movie-form" onSubmit={edit.handleSubmit}>
       <TextField
-        value={name}
-        id="standard-basic"
+        id="name"
+        name="name"
         label="Name"
         variant="standard"
-        onChange={(event) => {
-          setName(event.target.value);
-        }} />
+        value={edit.values.name}
+        onChange={edit.handleChange}
+        onBlur={edit.handleBlur}
+        // onChange={(event) => {
+        //   setName(event.target.value);
+        // }}
+      />
+      <br />
+      {edit.touched.name && edit.errors.name ? edit.errors.name : ""}
+      <br />
 
       <TextField
-        value={poster}
-        id="standard-basic"
-        label="Poster"
+        id="poster"
+        name="Poster"
+        label="Name"
         variant="standard"
-        onChange={(event) => {
-          setPoster(event.target.value);
-        }} />
+        value={edit.values.poster}
+        onChange={edit.handleChange}
+        onBlur={edit.handleBlur}
+      />
 
       <TextField
-        value={summary}
-        id="standard-basic"
+        id="summary"
+        name="summary"
         label="Summary"
         variant="standard"
-        onChange={(event) => {
-          setSummary(event.target.value);
-        }} />
+        value={edit.values.summary}
+        onChange={edit.handleChange}
+        onBlur={edit.handleBlur}
+      />
 
       <TextField
-        value={Rating}
-        id="standard-basic"
+        id="rating"
+        name="rating"
         label="Rating"
         variant="standard"
-        onChange={(event) => {
-          setRating(event.target.value);
-        }} />
+        value={edit.values.rating}
+        onChange={edit.handleChange}
+        onBlur={edit.handleBlur}
+      />
       <TextField
-        value={trailer}
-        id="standard-basic"
+        id="trailer"
+        name="trailer"
         label="Trailer"
         variant="standard"
-        onChange={(event) => {
-          setTrailer(event.target.value);
-        }} />
+        value={edit.values.trailer}
+        onChange={edit.handleChange}
+        onBlur={edit.handleBlur}
+      />
       {/* Copy Movie list and add new Movie through button */}
       {/* <button
                 onClick={() => {
@@ -71,35 +138,9 @@ export function EditMovieForm({ movie }) {
               >
                 Add Movie
               </button> */}
-      <Button
-        variant="contained"
-        color="success"
-        onClick={() => {
-          const updatedMovie = {
-            name: name,
-            poster: poster,
-            rating: Rating,
-            summary: summary,
-            trailer: trailer,
-          };
-
-          // setMovieList([...movieList, updatedMovie]);
-          //1. To UPDATE we use PUT method and respoective ID
-          //2. The BODY will have the data which is converted to JSON
-          //3. Headers is user for the JSON.
-          fetch(`${API}/movies/${movie.id}`, {
-            method: "PUT",
-            body: JSON.stringify(updatedMovie),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          })
-            .then((data) => data.json)
-            .then(() => navigate("/movies"));
-        }}
-      >
+      <Button variant="contained" color="success" type="submit">
         SAVE
       </Button>
-    </div>
+    </form>
   );
 }
