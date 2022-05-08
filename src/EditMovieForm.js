@@ -37,11 +37,11 @@ export function EditMovieForm({ movie }) {
   const navigate = useNavigate();
   const edit = useFormik({
     initialValues: {
-      name: name,
-      poster: poster,
-      summary: summary,
-      rating: Rating,
-      trailer: trailer,
+      name: "",
+      poster: "",
+      summary: "",
+      rating: "",
+      trailer: "",
     },
     validationSchema: editValidationSchema,
     onSubmit: (editMovie) => {
